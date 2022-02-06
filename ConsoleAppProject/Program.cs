@@ -21,12 +21,14 @@ namespace ConsoleAppProject
 
             Console.WriteLine("BNU CO453 Applications Programming 2021-2022");
             Console.WriteLine("Created by Leighton Burgoyne");
+            Console.WriteLine();
             Menu();
         }
 
         public static void Menu() // Menu Navigation
         {
             Console.WriteLine("Please select a Program to Run:"); // User Prompt
+            Console.WriteLine();
             Console.WriteLine("1. App01: Distance Converter"); // Distance Converter
             Console.WriteLine("2. App02: BMI Calculator"); // BMI Calculator
             Console.WriteLine("3. App03: Student Marks"); // Student Marks
