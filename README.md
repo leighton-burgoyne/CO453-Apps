@@ -5,7 +5,7 @@
 **Student ID**: | 22045432 |
 **Course:** | Computing |
 **Module**: | CO453 |
-**Started**: | September 2021 |    
+**Started**: | February 2022 |    
 
 1. App01: Distance Converter
 2. App02: BMI Calculator
