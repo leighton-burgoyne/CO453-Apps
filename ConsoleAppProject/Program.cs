@@ -17,9 +17,9 @@ namespace ConsoleAppProject
     {
         public static void Main(string[] args)
         {
-            Console.ForegroundColor = ConsoleColor.Yellow;
+            Console.ForegroundColor = ConsoleColor.White;
 
-            Console.WriteLine("BNU CO453 Applications Programming 2021-2022");
+            Console.WriteLine("BNU CO453 Application Programming 2021-2022");
             Console.WriteLine("Created by Leighton Burgoyne");
             Console.WriteLine();
             Menu();
