@@ -1,4 +1,4 @@
-﻿using ConsoleAppProject.App03;
+﻿using ConsoleAppProject.App01;
 using ConsoleAppProject.Helpers;
 using System;
 
@@ -41,7 +41,8 @@ namespace ConsoleAppProject
             {
                 case "1": // App01: Distance Converter
                     Console.WriteLine("Loading App01: Distance Converter");
-                    // Run Function
+                    DistanceConverter converter = new DistanceConverter();
+                    converter.Run();
                     break;
                 case "2": // App02: BMI Calculator
                     Console.WriteLine("Loading App02: BMI Calculator");
