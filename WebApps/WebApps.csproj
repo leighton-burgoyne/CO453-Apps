@@ -18,4 +18,8 @@
     <ProjectReference Include="..\ConsoleAppProject\ConsoleAppProject.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="wwwroot\images\" />
+  </ItemGroup>
+
 </Project>
