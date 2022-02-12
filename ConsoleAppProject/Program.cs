@@ -34,7 +34,8 @@ namespace ConsoleAppProject
             Console.WriteLine("3. App03: Student Marks"); // Student Marks
             Console.WriteLine("4. App04: Social Network"); // Social Network
             Console.WriteLine("5. App05: RPS Game"); // RPS Game
-
+            Console.WriteLine();
+            Console.Write("Enter Program Number > ");
             string SelectedApp = Console.ReadLine(); // Read the User Input from the Console
 
             switch (SelectedApp) // Switch and Case Method for Option Selection
