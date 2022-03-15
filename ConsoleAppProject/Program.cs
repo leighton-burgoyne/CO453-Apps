@@ -1,6 +1,7 @@
-﻿using ConsoleAppProject.App01;
+﻿using System;
+using ConsoleAppProject.App01;
+using ConsoleAppProject.App02;
 using ConsoleAppProject.Helpers;
-using System;
 
 namespace ConsoleAppProject
 {
@@ -47,7 +48,8 @@ namespace ConsoleAppProject
                     break;
                 case "2": // App02: BMI Calculator
                     Console.WriteLine("Loading App02: BMI Calculator");
-                    // Run Function
+                    BMICalculator calculator = new BMICalculator();
+                    calculator.Run();
                     break;
                 case "3": // App03: Student Marks
                     Console.WriteLine("Loading App03: Student Marks");

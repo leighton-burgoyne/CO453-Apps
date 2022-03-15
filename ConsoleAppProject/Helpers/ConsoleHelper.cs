@@ -30,7 +30,7 @@ namespace ConsoleAppProject.Helpers
 
             // Get the user's choice
 
-            int choiceNo = (int)InputNumber("\n Please enter your choice > ", 
+            int choiceNo = (int)InputNumber("\n Please enter your choice > ",
                                             1, choices.Length);
             return choiceNo;
         }
@@ -143,7 +143,7 @@ namespace ConsoleAppProject.Helpers
             Console.WriteLine($"\n {title}");
             Console.Write(" ");
 
-            for(int count = 0; count <= title.Length; count++)
+            for (int count = 0; count <= title.Length; count++)
             {
                 Console.Write("-");
             }

@@ -1,8 +1,44 @@
-﻿
+﻿@model ConsoleAppProject.App02.BMICalculator
 @{
     ViewData["Title"] = "LB WebApps | BMI Calculator";
 }
-<header>
-    <h1>BMI Calculator</h1>
+<header class="text-center jumbotron justify-content-center">
+    <h1 class="display-4">BMI Calculator</h1>
+    <p>
+        This App will allow you to calculate a person's BMI (Body Mass Index) through their Height and Weight, to assess their overall health.
+    </p>
 </header>
+<section>
+    <form method="post">
+        <h2>Height Details</h2>
+        <p>
+            Please enter the Height Details of the Person using Metric or Imperial Units
+        </p>
+        <p>
+            <label>Imperial</label>
+            <input type="number" placeholder="Feet" />
+            <input type="number" placeholder="Inches" />
+        </p>
+        <p>
+            <label>Metric</label>
+            <input type="number" placeholder="Centimetres" />
+        </p>
+        <h2>Weight Details</h2>
+        <p>
+            Please enter the Weight Details of the Person using Metric or Imperial Units
+        </p>
+        <p>
+            <label>Imperial</label>
+            <input type="number" placeholder="Feet" />
+            <input type="number" placeholder="Inches" />
+        </p>
+        <p>
+            <label>Metric</label>
+            <input type="number" placeholder="Centimetres" />
+        </p>
+        <p>
+            <button class="btn btn-success" type="submit">Calculate</button>
+        </p>
+    </form>
+</section>
 

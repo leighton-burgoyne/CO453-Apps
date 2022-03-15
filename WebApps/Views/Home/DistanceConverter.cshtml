@@ -1,8 +1,43 @@
-﻿
+﻿@model ConsoleAppProject.App01.DistanceConverter
 @{
     ViewData["Title"] = "LB WebApps | Distance Converter";
 }
-<header>
-    <h1>Distance Converter</h1>
+<header class="text-center jumbotron justify-content-center">
+    <h1 class="display-4">Distance Converter</h1>
+    <p>
+        This App will allow you to convert a range of Distance Measurements to Feet, Miles, or Metres.
+    </p>
 </header>
+<section>
+    <form method="post">
+        <h2>Converting from</h2>
+        <p>
+            Please enter the Value and Unit of Distance that you wish to convert from
+        </p>
+        <p>
+            <input type="number" placeholder="Value" />
+            <select class="form-select" aria-label="Default select example">
+                <option selected>Unit</option>
+                <option value="1">Feet</option>
+                <option value="2">Miles</option>
+                <option value="3">Metres</option>
+            </select>
+        </p>
+        <h2>Converting to</h2>
+        <p>
+            Please enter the Unit of Distance that you wish to convert to
+        </p>
+        <p>
+            <select class="form-select" aria-label="Default select example">
+                <option selected>Unit</option>
+                <option value="1">Feet</option>
+                <option value="2">Miles</option>
+                <option value="3">Metres</option>
+            </select>
+        </p>
+        <p>
+            <button class="btn btn-success" type="submit">Convert</button>
+        </p>
+    </form>
+</section>
 
