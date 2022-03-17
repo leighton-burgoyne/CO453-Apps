@@ -25,98 +25,66 @@ namespace ConsoleAppProject.App01
         /// </summary>
         public void Run()
         {
-            InputFromUnit();
-            InputToUnit();
-            InputValue();
+            InputUnits();
             ConvertDistance();
             OutputDistance();
+            InputValue();
         }
 
         /// <summary>
         /// Allows the User to enter the unit they wish to convert from.
         /// </summary>
-        public void InputFromUnit()
+        public void InputUnits()
         {
-            Console.WriteLine("Convert From:");
-            Console.WriteLine();
-            Console.WriteLine("1. Feet");
-            Console.WriteLine("2. Miles");
-            Console.WriteLine("3. Metres");
-            Console.WriteLine();
-            Console.Write("Enter Unit to convert from > ");
-            string FromUnitInput = Console.ReadLine(); // Read the User Input from the Console
-            
-            switch (FromUnitInput)
-            {
-                case "1": // From Unit: Feet
-                    Console.WriteLine("Converting from: Feet");
-                    fromUnit = DistanceUnits.Feet;
-                    break;
-
-                case "2": // From Unit: Miles
-                    Console.WriteLine("Converting from: Miles");
-                    fromUnit = DistanceUnits.Miles;
-                    break;
-
-                case "3": // From Unit: Metres
-                    Console.WriteLine("Converting from: Metres");
-                    fromUnit = DistanceUnits.Metres;
-                    break;
-
-                default: // Invalid Input
-                    Console.WriteLine("Invalid Input: Please specify a valid option listed above.");
-                    break;
-            }
-                
+            fromUnit = SelectUnit("Enter the unit you wish to convert from:");
+            toUnit = SelectUnit("Enter the unit you wish to convert to:"); 
         }
 
-        /// <summary>
-        /// Allows the User to enter the unit they wish to convert to.
-        /// </summary>
-        public void InputToUnit()
+        private DistanceUnits SelectUnit(string prompt)
         {
-            Console.WriteLine("Convert To:");
+            Console.WriteLine(prompt);
             Console.WriteLine();
-            Console.WriteLine("1. Feet");
-            Console.WriteLine("2. Miles");
-            Console.WriteLine("3. Metres");
-            Console.WriteLine();
-            Console.Write("Enter Unit to convert to > ");
-            string ToUnitInput = Console.ReadLine(); // Read the User Input from the Console
 
-            switch (ToUnitInput)
+            Console.WriteLine($" 1. {DistanceUnits.Feet}");
+            Console.WriteLine($" 2. {DistanceUnits.Miles}");
+            Console.WriteLine($" 3. {DistanceUnits.Metres}");
+            Console.WriteLine();
+
+            Console.Write("Please enter choice > ");
+
+            string choice = Console.ReadLine();
+            Console.WriteLine();
+
+            if (choice == "1")
             {
-                case "1": // To Unit: Feet
-                    Console.WriteLine("Converting to: Feet");
-                    toUnit = DistanceUnits.Feet;
-                    ConvertDistance();
-                    break;
-
-                case "2": // To Unit: Miles
-                    Console.WriteLine("Converting to: Miles");
-                    toUnit = DistanceUnits.Miles;
-                    ConvertDistance();
-                    break;
-
-                case "3": // To Unit: Metres
-                    Console.WriteLine("Converting to: Metres");
-                    toUnit = DistanceUnits.Metres;
-                    ConvertDistance();
-                    break;
-
-                default: // Invalid Input
-                    Console.WriteLine("Invalid Input: Please specify a valid option listed above.");
-                    break;
+                Console.WriteLine($"Converting from: {DistanceUnits.Feet}");
+                return DistanceUnits.Feet;
             }
 
-        }
+            else if (choice == "2")
+            {
+                Console.WriteLine($"Converting from: {DistanceUnits.Miles}");
+                return DistanceUnits.Miles;
+            }
 
+            else if (choice == "3")
+            {
+                Console.WriteLine($"Converting from: {DistanceUnits.Metres}");
+                return DistanceUnits.Metres;
+            }
+            else
+            {
+                Console.WriteLine($"ERROR: Input Invalid");
+                return DistanceUnits.NoUnit;
+            }
+        }
+ 
         /// <summary>
         /// Allows the User to input the number to be converted.
         /// </summary>
         public void InputValue()
         {
-            ConsoleHelper.InputNumber("Enter value to convert to > ");
+            fromValue = ConsoleHelper.InputNumber("Enter value to convert to > ");
         }
 
         /// <summary>
