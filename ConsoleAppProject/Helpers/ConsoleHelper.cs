@@ -11,7 +11,7 @@ namespace ConsoleAppProject.Helpers
     /// There are methods for outputting a main heading
     /// and a title.
     /// <author>
-    /// Derek Peacock 2021
+    /// Created by Derek Peacock (2021), Modified by Leighton Burgoyne (2022)
     /// </author>
     /// </summary>
     public static class ConsoleHelper
@@ -123,13 +123,11 @@ namespace ConsoleAppProject.Helpers
         {
             Console.ForegroundColor = ConsoleColor.DarkBlue;
 
-            Console.WriteLine("\n -----------------------");
-            Console.WriteLine($"         {heading}       ");
-            Console.WriteLine("   by Leighton Burgoyne   ");
-            Console.WriteLine(" -------------------------" +
-                "\n");
+            Console.WriteLine($"\n -------------------- \n {heading} \n by Leighton Burgoyne \n -------------------- ");
 
             Console.ForegroundColor = ConsoleColor.White;
+
+            Console.WriteLine();
         }
 
         /// <summary>
