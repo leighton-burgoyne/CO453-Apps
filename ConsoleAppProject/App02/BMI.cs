@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ConsoleAppProject.Helpers;
+using System;
 
 namespace ConsoleAppProject.App02
 {
@@ -10,9 +11,10 @@ namespace ConsoleAppProject.App02
     /// </author>
     public class BMICalculator
     {
+        // Variables
         private double weight; // User Weight
         private double height; // User Height
-        private double rawCalculation; // Raw Calculation before Squared
+        private double bmi;
         private string weightStatus; // Assigned Weight Status (derived from WHO)
 
         /// <summary>
@@ -31,13 +33,8 @@ namespace ConsoleAppProject.App02
         /// </summary>
         public void InputValue()
         {
-            Console.Write("Enter Weight in Kg > ");
-            string weightInput = Console.ReadLine();
-            weight = Convert.ToDouble(weightInput);
-
-            Console.Write("Enter Height in Metres > ");
-            string heightInput = Console.ReadLine();
-            height = Convert.ToDouble(heightInput);
+            height = ConsoleHelper.InputNumber("Enter Height in Metres > ");
+            weight = ConsoleHelper.InputNumber("Enter Weight in Kg > ");
         }
 
         /// <summary>
@@ -45,37 +42,42 @@ namespace ConsoleAppProject.App02
         /// </summary>
         public void CalculateBMI()
         {
-            rawCalculation = weight / height; // Unsquared Calculation (Raw)
-            double Sqr = Math.Pow(rawCalculation, 2); // Squared Calculation (Final)
+            double heightSqr = Math.Pow(height, 2);
 
-            if (Sqr < 18.50) // Underweight Range
+            bmi = Math.Round(weight / heightSqr, 2);
+
+            if (bmi < 18.50) // Underweight Range
             {
                 weightStatus = "Underweight";
             }
 
-            else if (Sqr > 18.50 && Sqr < 24.9) // Normal Range
+            else if (bmi > 18.50 && bmi < 24.99) // Normal Range
             {
                 weightStatus = "Normal";
             }
 
-            else if (Sqr > 25.0 && Sqr < 29.9) // Overweight Range
+            else if (bmi > 25.00 && bmi < 29.99) // Overweight Range
             {
                 weightStatus = "Overweight";
             }
 
-            else if (Sqr > 30.0 && Sqr < 34.9) // Obese (Class I) Range
+            else if (bmi > 30.00 && bmi < 34.99) // Obese (Class I) Range
             {
                 weightStatus = "Obese (Class I)";
             }
 
-            else if (Sqr > 35.0 && Sqr < 39.9) // Obese (Class II) Range
+            else if (bmi > 35.00 && bmi < 39.99) // Obese (Class II) Range
             {
                 weightStatus = "Obese (Class II)";
             }
 
-            else if (Sqr >= 40.0) // Obese (Class III) Range
+            else if (bmi >= 40.00) // Obese (Class III) Range
             {
                 weightStatus = "Obese (Class III)";
+            }
+            else
+            {
+                weightStatus = "No Status Assigned";
             }
         }
 
@@ -85,7 +87,7 @@ namespace ConsoleAppProject.App02
         public void OutputBMI()
         {
             OutputHeading();
-            Console.WriteLine("Your BMI is: " +rawCalculation);
+            Console.WriteLine("Your BMI is: " +bmi);
             Console.WriteLine("This places you into the " +weightStatus + " category");
         }
 
@@ -93,7 +95,7 @@ namespace ConsoleAppProject.App02
         /// Outputs a Heading showing the Program Name and the Author.
         /// </summary>
         public void OutputHeading()
-        { 
+        {
             Console.WriteLine();
             Console.WriteLine("--------------------------");
             Console.WriteLine("  App02: BMI Calculator   ");
