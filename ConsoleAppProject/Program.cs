@@ -1,6 +1,8 @@
 ﻿using System;
 using ConsoleAppProject.App01;
 using ConsoleAppProject.App02;
+using ConsoleAppProject.App03;
+using ConsoleAppProject.App04;
 using ConsoleAppProject.Helpers;
 
 namespace ConsoleAppProject
@@ -53,11 +55,13 @@ namespace ConsoleAppProject
                     break;
                 case "3": // App03: Student Marks
                     Console.WriteLine("Loading App03: Student Marks");
-                    // Run Function
+                    StudentGrades grades = new StudentGrades();
+                    grades.Run();
                     break;
                 case "4": // App04: Social Network
                     Console.WriteLine("Loading App04: Social Network");
-                    // Run Function
+                    NetworkApp network = new NetworkApp();
+                    network.Run();
                     break;
                 case "5": // App05: RPS Game
                     Console.WriteLine("Loading App05: RPS Game");
