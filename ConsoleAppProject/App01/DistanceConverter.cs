@@ -1,4 +1,4 @@
-﻿using ConsoleAppProject.Helpers; // Uses Helper Classes
+﻿using ConsoleAppProject.Helpers;
 using System;
 
 namespace ConsoleAppProject.App01
@@ -7,28 +7,42 @@ namespace ConsoleAppProject.App01
     /// This program converts Distance Measurements to different units, such as between Miles and Feet - it then outputs the result of the conversion to the user.
     /// </summary>
     /// <author>
-    /// Leighton Burgoyne Version 0.1
+    /// Leighton Burgoyne Version 0.2 (Refactored)
     /// </author>
     public class DistanceConverter
     {
+        // Constants
         private const int MileInFeet = 5280; // 1 Mile in Feet used for calculating the Results.
-        private const double MileInMetres = 1609.34; // 1 Mile in Metres for calculating the Results.
+        private const double MileInMetres = 1609.34; // 1 Mile in Metres used for calculating the Results.
+        public const double FeetInMetres = 3.28084; // 1 Foot in Metres used for calculating the Results.
 
-        private double fromValue; // From Value Variable
-        private double toValue; // To Value Variable
+        public const string FEET = "Feet";
+        public const string METRES = "Metres";
+        public const string MILES = "Miles";
 
-        private DistanceUnits fromUnit; // Unit to convert from
-        private DistanceUnits toUnit; // Unit to convert to
+        // Variables
+        public double FromValue { get; set; } // From Value Variable
+        public double ToValue { get; set; } // To Value Variable
 
+        // Enumerations
+        public DistanceUnits FromUnit { get; set; } // Unit to convert from
+        public DistanceUnits ToUnit { get; set; } // Unit to convert to
+
+        // Constructor (Temp Web Use)
+        public DistanceConverter()
+        {
+            FromUnit = DistanceUnits.Miles;
+            ToUnit = DistanceUnits.Feet;
+        }
         /// <summary>
         /// Runs the required functions in the correct order, allowing for the program to operate correctly.
         /// </summary>
         public void Run()
         {
             InputUnits();
+            InputValue();
             ConvertDistance();
             OutputDistance();
-            InputValue();
         }
 
         /// <summary>
@@ -36,11 +50,11 @@ namespace ConsoleAppProject.App01
         /// </summary>
         public void InputUnits()
         {
-            fromUnit = SelectUnit("Enter the unit you wish to convert from:");
-            toUnit = SelectUnit("Enter the unit you wish to convert to:"); 
+            FromUnit = SelectUnit("Enter the unit you wish to convert from:");
+            ToUnit = SelectUnit("Enter the unit you wish to convert to:");
         }
 
-        private DistanceUnits SelectUnit(string prompt)
+        public DistanceUnits SelectUnit(string prompt)
         {
             Console.WriteLine(prompt);
             Console.WriteLine();
@@ -57,56 +71,64 @@ namespace ConsoleAppProject.App01
 
             if (choice == "1")
             {
-                Console.WriteLine($"Converting from: {DistanceUnits.Feet}");
+                Console.WriteLine($"Selected: {DistanceUnits.Feet}");
                 return DistanceUnits.Feet;
             }
 
             else if (choice == "2")
             {
-                Console.WriteLine($"Converting from: {DistanceUnits.Miles}");
+                Console.WriteLine($"Selected: {DistanceUnits.Miles}");
                 return DistanceUnits.Miles;
             }
 
             else if (choice == "3")
             {
-                Console.WriteLine($"Converting from: {DistanceUnits.Metres}");
+                Console.WriteLine($"Selected: {DistanceUnits.Metres}");
                 return DistanceUnits.Metres;
             }
             else
             {
-                Console.WriteLine($"ERROR: Input Invalid");
+                Console.WriteLine("ERROR: Input Invalid");
                 return DistanceUnits.NoUnit;
             }
         }
- 
+
         /// <summary>
         /// Allows the User to input the number to be converted.
         /// </summary>
         public void InputValue()
         {
-            fromValue = ConsoleHelper.InputNumber("Enter value to convert to > ");
+            FromValue = ConsoleHelper.InputNumber("Enter value to convert to > ");
         }
 
         /// <summary>
         /// Determines the Formula to be used for calculating the converted values, and performs the calculation.
         /// </summary>
-        private void ConvertDistance()
+        public void ConvertDistance()
         {
-            if (fromUnit == DistanceUnits.Miles && toUnit == DistanceUnits.Feet) // Miles to Feet
+            if (FromUnit == DistanceUnits.Miles && ToUnit == DistanceUnits.Feet) // Miles to Feet
             {
-                toValue = fromValue * MileInFeet;
+                ToValue = FromValue * MileInFeet;
             }
-            else if (fromUnit == DistanceUnits.Feet && toUnit == DistanceUnits.Miles) // Feet to Miles
+            else if (FromUnit == DistanceUnits.Feet && ToUnit == DistanceUnits.Miles) // Feet to Miles
             {
-                toValue = fromValue / MileInFeet;
+                ToValue = FromValue / MileInFeet;
             }
-            else if (fromUnit == DistanceUnits.Miles && toUnit == DistanceUnits.Metres) // Miles to Metres
+            else if (FromUnit == DistanceUnits.Miles && ToUnit == DistanceUnits.Metres) // Miles to Metres
             {
-                toValue = fromValue * MileInMetres;
+                ToValue = FromValue * MileInMetres;
             }
-            else if (fromUnit == DistanceUnits.Metres && toUnit == DistanceUnits.Miles) // Metres to Miles
+            else if (FromUnit == DistanceUnits.Metres && ToUnit == DistanceUnits.Miles) // Metres to Miles
             {
-                toValue = fromValue / MileInMetres;
+                ToValue = FromValue / MileInMetres;
+            }
+            else if (FromUnit == DistanceUnits.Metres && ToUnit == DistanceUnits.Feet) // Metres to Feet
+            {
+                ToValue = FromValue * FeetInMetres;
+            }
+            else if (FromUnit == DistanceUnits.Feet && ToUnit == DistanceUnits.Metres) // Feet to Metres
+            {
+                ToValue = FromValue / FeetInMetres;
             }
             else // Other Combinations
             {
@@ -118,10 +140,10 @@ namespace ConsoleAppProject.App01
         /// <summary>
         /// Outputs the result determined from the formula calculation to the user, with the program heading.
         /// </summary>
-        private void OutputDistance()
+        public void OutputDistance()
         {
             ConsoleHelper.OutputHeading("Distance Converter");
-            Console.WriteLine(fromValue + " " + fromUnit + " converted to " + toUnit + "\nEquals: " + toValue);
+            Console.WriteLine(FromValue + " " + FromUnit + " converted to " + ToUnit + "\nEquals: " + ToValue);
         }
     }
 }

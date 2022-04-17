@@ -11,7 +11,6 @@ namespace ConsoleAppProject.App01
         NoUnit,
         Feet,
         Metres,
-        Kilometres,
         Miles
     }
 }
