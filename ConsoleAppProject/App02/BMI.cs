@@ -12,10 +12,13 @@ namespace ConsoleAppProject.App02
     public class BMICalculator
     {
         // Variables
-        private double weight; // User Weight
-        private double height; // User Height
-        private double bmi;
-        private string weightStatus; // Assigned Weight Status (derived from WHO)
+        public double weight; // User Weight
+        public double height; // User Height
+        public double bmi;
+        public string weightStatus; // Assigned Weight Status (derived from WHO)
+
+        // Enumerations
+        public MeasurementSystems Unit { get; set; } // Measurement System to use (Metric or Imperial)
 
         /// <summary>
         /// Runs the required functions in the correct order, allowing for the program to operate correctly.
@@ -24,17 +27,48 @@ namespace ConsoleAppProject.App02
         {
             InputValue();
             CalculateBMI();
+            AssignCategory();
             OutputBMI();
         }
-
 
         /// <summary>
         /// Allows the User to input the weight and height in a Kg and Metres (kg/m2).
         /// </summary>
         public void InputValue()
         {
-            height = ConsoleHelper.InputNumber("Enter Height in Metres > ");
-            weight = ConsoleHelper.InputNumber("Enter Weight in Kg > ");
+            Unit = SelectUnit("Enter Measurement System to use > ");
+        }
+
+        public MeasurementSystems SelectUnit(string prompt)
+        {
+            Console.WriteLine(prompt);
+            Console.WriteLine();
+
+            Console.WriteLine($" 1. {MeasurementSystems.Metric}");
+            Console.WriteLine($" 2. {MeasurementSystems.Imperial}");
+            Console.WriteLine();
+
+            Console.Write(prompt);
+
+            string choice = Console.ReadLine();
+            Console.WriteLine();
+
+            if (choice == "1")
+            {
+                Console.WriteLine($"Using: {MeasurementSystems.Metric}");
+                return MeasurementSystems.Metric;
+            }
+
+            else if (choice == "2")
+            {
+                Console.WriteLine($"Using: {MeasurementSystems.Imperial}");
+                return MeasurementSystems.Imperial;
+            }
+            else
+            {
+                Console.WriteLine("ERROR: Input Invalid");
+                return MeasurementSystems.NoUnit;
+            }
         }
 
         /// <summary>
@@ -42,10 +76,25 @@ namespace ConsoleAppProject.App02
         /// </summary>
         public void CalculateBMI()
         {
-            double heightSqr = Math.Pow(height, 2);
-
-            bmi = Math.Round(weight / heightSqr, 2);
-
+            if (Unit == MeasurementSystems.Metric)
+            {
+                height = ConsoleHelper.InputNumber("Enter Height in Metres > ");
+                weight = ConsoleHelper.InputNumber("Enter Weight in Kg > ");
+                bmi = Math.Round(weight / height * height, 2);
+            }
+            else if (Unit == MeasurementSystems.Imperial) // Needs more work
+            {
+                height = ConsoleHelper.InputNumber("Enter Height in Feet and Inches > ");
+                weight = ConsoleHelper.InputNumber("Enter Weight in Stones and Pounds  > ");
+                bmi = Math.Round(703 * weight / height * height, 2);
+            }
+            else
+            {
+                Console.WriteLine("Error");
+            }
+        }
+        public void AssignCategory()
+        { 
             if (bmi < 18.50) // Underweight Range
             {
                 weightStatus = "Underweight";
@@ -88,6 +137,7 @@ namespace ConsoleAppProject.App02
         {
             OutputHeading();
             Console.WriteLine("Your BMI is: " +bmi);
+            Console.WriteLine();
             Console.WriteLine("This places you into the " +weightStatus + " category");
         }
 
