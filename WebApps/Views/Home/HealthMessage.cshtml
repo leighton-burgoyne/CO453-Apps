@@ -1,0 +1,25 @@
+﻿@model double
+@using ConsoleAppProject.App02
+@{
+    ViewData["Title"] = "LB WebApps | BMI Calculator Health Message";
+}
+@{
+    BMICalculatorWeb calculator = new BMICalculatorWeb();
+    calculator.Bmi = Model;
+}
+<header class="text-center jumbotron justify-content-center">
+    <h1 class="display-4">BMI Calculator | Health Message</h1>
+    <p>
+        This App will allow you to calculate a person's BMI (Body Mass Index) through their Height and Weight, to assess their overall health.
+    </p>
+</header>
+<section>
+    <h2>Your Body Mass Index (BMI)</h2>
+    <p class="text-lead">
+        @calculator.GetHealthMessage()
+    </p>
+    <h2>Advisories (1)</h2>
+    <p class="text-lead">
+        BAME to go here
+    </p>
+</section>

@@ -1,4 +1,5 @@
-﻿@model ConsoleAppProject.App02.BMICalculator
+﻿@model ConsoleAppProject.App02.BMICalculatorWeb
+@using ConsoleAppProject.App02
 @{
     ViewData["Title"] = "LB WebApps | BMI Calculator";
 }
@@ -11,30 +12,29 @@
 <section>
     <form method="post">
         <h2>Height Details</h2>
+
+        <label>Metric</label>
         <p>
-            Please enter the Height Details of the Person using Metric or Imperial Units
+            <input type="number" placeholder="Metres" asp-for="@Model.Centimetres" />
         </p>
+        
+        <label>Imperial</label>
         <p>
-            <label>Imperial</label>
-            <input type="number" placeholder="Feet" />
-            <input type="number" placeholder="Inches" />
+            <input type="number" placeholder="Feet" value="6" asp-for="@Model.Feet" />
+            <input type="number" placeholder="Inches" value="0" asp-for="@Model.Inches" />
         </p>
-        <p>
-            <label>Metric</label>
-            <input type="number" placeholder="Centimetres" />
-        </p>
+        
         <h2>Weight Details</h2>
+
+        <label>Metric</label>
         <p>
-            Please enter the Weight Details of the Person using Metric or Imperial Units
+            <input type="number" placeholder="Kilograms" asp-for="@Model.Kilograms" />
         </p>
+
+        <label>Imperial</label>
         <p>
-            <label>Imperial</label>
-            <input type="number" placeholder="Feet" />
-            <input type="number" placeholder="Inches" />
-        </p>
-        <p>
-            <label>Metric</label>
-            <input type="number" placeholder="Centimetres" />
+            <input type="number" placeholder="Stones" value="11" asp-for="@Model.Stones" />
+            <input type="number" placeholder="Pounds" value="5" asp-for="@Model.Pounds" />
         </p>
         <p>
             <button class="btn btn-success" type="submit">Calculate</button>

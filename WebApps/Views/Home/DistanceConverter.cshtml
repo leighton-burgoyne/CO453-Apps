@@ -1,4 +1,5 @@
 ﻿@model ConsoleAppProject.App01.DistanceConverter
+@using ConsoleAppProject.App01
 @{
     ViewData["Title"] = "LB WebApps | Distance Converter";
 }
@@ -15,25 +16,38 @@
             Please enter the Value and Unit of Distance that you wish to convert from
         </p>
         <p>
-            <input type="number" placeholder="Value" />
-            <select class="form-select" aria-label="Default select example">
-                <option selected>Unit</option>
-                <option value="1">Feet</option>
-                <option value="2">Miles</option>
-                <option value="3">Metres</option>
+            <select asp-for="@Model.FromUnit" 
+                asp-items="@Html.GetEnumSelectList<DistanceUnits>()">
             </select>
+        </p>
+        <p>
+            @if (Model.FromDistance == 0)
+            {
+                <input type="text" asp-for="@Model.FromDistance" value="" placeholder="From Distance" required />
+            }
+            else
+            {
+                <input type="text" asp-for="@Model.FromDistance" placeholder="From Distance" required />
+            }
         </p>
         <h2>Converting to</h2>
         <p>
             Please enter the Unit of Distance that you wish to convert to
         </p>
         <p>
-            <select class="form-select" aria-label="Default select example">
-                <option selected>Unit</option>
-                <option value="1">Feet</option>
-                <option value="2">Miles</option>
-                <option value="3">Metres</option>
+            <select asp-for="@Model.ToUnit" 
+                asp-items="@Html.GetEnumSelectList<DistanceUnits>()">
             </select>
+        </p>
+        <p>
+            @if (Model.ToDistance == 0)
+            {
+                <input type="text" asp-for="@Model.ToDistance" value="" placeholder="To Distance" readonly />
+            }
+            else
+            {
+                <input type="text" asp-for="@Model.ToDistance" value="@Model.ToDistance.ToString("0.00")" placeholder="To Distance" readonly />
+            }
         </p>
         <p>
             <button class="btn btn-success" type="submit">Convert</button>
