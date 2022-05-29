@@ -4,18 +4,25 @@ using System.Text;
 
 namespace ConsoleAppProject.App04
 {
-    public class Post
+    public class Post : NewsFeed
     {
+        // username of the post's author
+        public string Username { get; }
+        
+        public DateTime Timestamp { get; }
+        
+        public int PostId { get; }
+
+        private static int instances = 0;
+        
         private int likes;
 
         private readonly List<string> comments;
 
-        // username of the post's author
-        public string Username { get; }
-        public DateTime Timestamp { get; }
-
         public Post(string author)
         {
+            instances++;
+            PostId = instances;
             this.Username = author;
             Timestamp = DateTime.Now;
 
@@ -42,6 +49,16 @@ namespace ConsoleAppProject.App04
             }
         }
 
+        //public int GetNumberOfPosts()
+        //{
+        //    int NumberOfPosts = 0;
+        //    foreach (Post post in Posts)
+        //    {
+        //        NumberOfPosts++;
+        //    }
+        //    return NumberOfPosts;
+        //}
+
         ///<summary>
         /// Add a comment to this post.
         /// </summary>
@@ -59,11 +76,11 @@ namespace ConsoleAppProject.App04
         /// (Currently: Print to the text terminal. This is simulating display 
         /// in a web browser for now.)
         ///</summary>
-        public void Display()
+        public new virtual void Display()
         {
             Console.WriteLine();
             Console.WriteLine($"    Author: {Username}");
-            Console.WriteLine($"    Time Elpased: {FormatElapsedTime(Timestamp)}");
+            Console.WriteLine($"    Time Elapsed: {FormatElapsedTime(Timestamp)}");
             Console.WriteLine();
 
             if (likes > 0)

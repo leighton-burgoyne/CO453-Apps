@@ -20,16 +20,22 @@ namespace ConsoleAppProject.App04
     ///</author> 
     public class NewsFeed
     {
-        private readonly List<Post> posts;
+        public const string AUTHOR = "Leighton";
+        public List<Post> Posts { get;}
 
         ///<summary>
         /// Construct an empty news feed.
         ///</summary>
         public NewsFeed()
         {
-            posts = new List<Post>();
-        }
+            Posts = new List<Post>();
+            
+            MessagePost post = new MessagePost(AUTHOR, "This is my first post.");
+            AddMessagePost(post);
 
+            PhotoPost photoPost = new PhotoPost(AUTHOR, "Photo1.jpg", "My first photo");
+            AddPhotoPost(photoPost);
+        }
 
         ///<summary>
         /// Add a text post to the news feed.
@@ -38,7 +44,7 @@ namespace ConsoleAppProject.App04
         ///</summary>
         public void AddMessagePost(MessagePost message)
         {
-            posts.Add(message);
+            Posts.Add(message);
         }
 
         ///<summary>
@@ -48,7 +54,7 @@ namespace ConsoleAppProject.App04
         ///</summary>
         public void AddPhotoPost(PhotoPost photo)
         {
-            posts.Add(photo);
+            Posts.Add(photo);
         }
 
         ///<summary>
@@ -58,7 +64,7 @@ namespace ConsoleAppProject.App04
         public void Display()
         {
             // display all text posts
-            foreach (Post post in posts)
+            foreach (Post post in Posts)
             {
                 post.Display();
                 Console.WriteLine();   // empty line between posts
