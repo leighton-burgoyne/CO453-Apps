@@ -18,7 +18,7 @@ namespace App05MonoGame.Sprites
 
         public string Text { get; set; }
 
-        public event EventHandler click;
+        public event EventHandler Click;
 
         public bool Clicked { get; private set; }
 
@@ -47,13 +47,12 @@ namespace App05MonoGame.Sprites
 
         #endregion
 
-        public Button(SpriteFont font, Texture2D image)
+        public Button(SpriteFont font, Texture2D image, Color color)
         {
             this.font = font;
             Image = image;
             Scale = 1.0f;
-
-            PenColour = Color.Black;
+            PenColour = color;
         }
 
         #region Methods
@@ -62,7 +61,7 @@ namespace App05MonoGame.Sprites
         {
             var colour = Color.White;
 
-            if (isHovering) colour = Color.Gray;
+            //if (isHovering) colour = Color.Gray;
 
             spriteBatch.Draw(Image, BoundingBox, colour);
 
@@ -94,18 +93,12 @@ namespace App05MonoGame.Sprites
                 if(currentMouse.LeftButton == ButtonState.Released &&
                    previousMouse.LeftButton == ButtonState.Pressed)
                 {
-                    if(click != null)
+                    if(Click != null)
                     {
-                        click(this, new EventArgs());
+                        Click(this, new EventArgs());
                     }
                 }
             }
-        }
-
-
-        public bool HasCollided(Sprite other)
-        {
-            return false;
         }
 
         #endregion

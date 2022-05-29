@@ -10,9 +10,10 @@ namespace App05MonoGame
     public enum GameStates
     {
         Starting,
-        PlayingLevel1,
-        PlayingLevel2,
-        Ending
+        HowToPlay,
+        LevelOne,
+        GameLost,
+        GameWon
     }
 
     /// <summary>
@@ -23,11 +24,12 @@ namespace App05MonoGame
     /// style game where the player moves around collecting
     /// random coins and the enemy tries to catch the player.
     /// 
-    /// Last Updated 7th June 2021
+    /// Version: 1.0
+    /// Date: 01/05/2022
     /// 
     /// </summary>
     /// <authors>
-    /// Derek Peacock & Andrei Cruceru
+    /// Leighton Burgoyne
     /// </authors>
     public class App05Game : Game
     {
@@ -36,10 +38,10 @@ namespace App05MonoGame
         public const int Game_Height = 720;
         public const int Game_Width = 1280;
 
-        public const string GameName = "Game Name";
-        public const string ModuleName = "BNU CO453 2021";
-        public const string AuthorNames = "Derek & Andrei";
-        public const string AppName = "App05: C# MonoGame";
+        public const string GameName = "";
+        public const string ModuleName = "BNU CO453 2022";
+        public const string AuthorNames = "Leighton Burgoyne";
+        public const string AppName = "App05 MonoGame";
 
         #endregion
 
@@ -53,22 +55,26 @@ namespace App05MonoGame
         
         public GraphicsDevice Graphics { get; set; }
 
+        // Records whether the game is Paused
         public bool Paused { get; set; }
+
+        // Records whether the Game is Muted
+        public bool Muted { get; set; }
 
         #endregion
 
         #region: Attributes
 
         // Essential XNA objects for Graphics manipulation
-
-        private readonly GraphicsDeviceManager graphicsManager;
+        private readonly GraphicsDeviceManager graphics;
         private SpriteBatch spriteBatch;
 
         // Screens
-
         private StartScreen startScreen;
-        private CoinsScreen coinsScreen;
-        private AsteroidsScreen asteroidsScreen;
+        private HowToPlayScreen howToPlayScreen;
+        private LevelOneScreen levelOneScreen;
+        private GameLostScreen gameLostScreen;
+        private GameWonScreen gameWonScreen;
 
         #endregion
 
@@ -78,7 +84,7 @@ namespace App05MonoGame
         /// </summary>
         public App05Game()
         {
-            graphicsManager = new GraphicsDeviceManager(this);
+            graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
             IsMouseVisible = true;
         }
@@ -89,15 +95,17 @@ namespace App05MonoGame
         /// </summary>
         protected override void Initialize()
         {
+            Window.Title = "Space Warfare";
+
             GameState = GameStates.Starting;
             GameStateTitle = GameName + ": Start Screen";
 
-            graphicsManager.PreferredBackBufferWidth = Game_Width;
-            graphicsManager.PreferredBackBufferHeight = Game_Height;
+            graphics.PreferredBackBufferWidth = Game_Width;
+            graphics.PreferredBackBufferHeight = Game_Height;
 
-            graphicsManager.ApplyChanges();
+            graphics.ApplyChanges();
 
-            Graphics = graphicsManager.GraphicsDevice;
+            Graphics = graphics.GraphicsDevice;
             Paused = false;
 
             base.Initialize();
@@ -114,7 +122,7 @@ namespace App05MonoGame
             // Load Music and SoundEffects
 
             SoundController.LoadContent(Content);
-            SoundController.PlaySong("Adventure");
+            SoundController.PlaySong("NightLurker");
 
             startScreen = new StartScreen(this);
         }
@@ -135,27 +143,39 @@ namespace App05MonoGame
 
             switch (GameState)
             {
+                // Start Screen
                 case GameStates.Starting:
                     startScreen.Update(gameTime); 
                     break;
-                
-                // Coins Game
-                case GameStates.PlayingLevel1:
-                    if (coinsScreen == null)
-                        coinsScreen = new CoinsScreen(this);
-                    coinsScreen.Update(gameTime);
+
+                // How To Play Screen
+                case GameStates.HowToPlay:
+                    if (howToPlayScreen == null)
+                        howToPlayScreen = new HowToPlayScreen(this);
+                    howToPlayScreen.Update(gameTime);
                     break;
                 
-                // Asteroids Game
-                case GameStates.PlayingLevel2:
-                    if (asteroidsScreen == null)
-                        asteroidsScreen = new AsteroidsScreen(this);
-                    asteroidsScreen.Update(gameTime);
+                // Level One Screen
+                case GameStates.LevelOne:
+                    if (levelOneScreen == null)
+                        levelOneScreen = new LevelOneScreen(this);
+                    levelOneScreen.Update(gameTime);
                     break;
-                
-                case GameStates.Ending:
+
+                // Game Lost Screen
+                case GameStates.GameLost:
+                    if (gameLostScreen == null)
+                        gameLostScreen = new GameLostScreen(this);
+                    gameLostScreen.Update(gameTime);
                     break;
-                
+
+                // Game Won Screen
+                case GameStates.GameWon:
+                    if (gameWonScreen == null)
+                        gameWonScreen = new GameWonScreen(this);
+                    gameWonScreen.Update(gameTime);
+                    break;
+
                 default:
                     break;
             }
@@ -175,21 +195,33 @@ namespace App05MonoGame
 
             switch (GameState)
             {
+                // Start Screen
                 case GameStates.Starting:
                     startScreen.Draw(spriteBatch, gameTime);
                     break;
 
-                case GameStates.PlayingLevel1:
-                    if (coinsScreen != null)
-                        coinsScreen.Draw(spriteBatch, gameTime);
+                // How To Play Screen
+                case GameStates.HowToPlay:
+                    if (howToPlayScreen != null)
+                        howToPlayScreen.Draw(spriteBatch, gameTime);
                     break;
 
-                case GameStates.PlayingLevel2:
-                    if (asteroidsScreen != null)
-                        asteroidsScreen.Draw(spriteBatch, gameTime);
+                // Level One Screen
+                case GameStates.LevelOne:
+                    if (levelOneScreen != null)
+                        levelOneScreen.Draw(spriteBatch, gameTime);
                     break;
 
-                case GameStates.Ending:
+                // Game Lost Screen
+                case GameStates.GameLost:
+                    if (gameLostScreen != null)
+                        gameLostScreen.Draw(spriteBatch, gameTime);
+                    break;
+
+                // Game Won Screen
+                case GameStates.GameWon:
+                    if (gameWonScreen != null)
+                        gameWonScreen.Draw(spriteBatch, gameTime);
                     break;
 
                 default:

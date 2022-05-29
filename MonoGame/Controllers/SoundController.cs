@@ -11,16 +11,17 @@ namespace App05MonoGame.Controllers
     /// </summary>
     public enum Sounds
     {
-        Coins,
-        Collisions
+        Collisions,
+        Shooting,
+        Lose,
+        Win
     }
     
     /// <summary>
-    /// Sound Controller will manage any sound effects 
-    /// or music in the game.
+    /// Sound Controller will manage any sound effects or music in the game.
     /// </summary>
     /// <author>
-    /// Andrei Cruceru & Derek Peacock
+    /// Created by Andrei Cruceru & Derek Peacock. Modified by Leighton Burgoyne
     /// </author>
     public static class SoundController
     {
@@ -28,9 +29,11 @@ namespace App05MonoGame.Controllers
 
         // Dictionary Keys
 
-        public const string SongName = "Adventure";
-        public const string CoinsEffect = "CoinEffect";
-        public const string CollisionEffect = "CollisionEffect";
+        public const string SongName = "NightLurker"; // Background Music
+        public const string CollisionEffect = "CollisionEffect"; // Asteroid Collision Sound Effect
+        public const string ProjectileEffect = "ProjectileEffect";
+        public const string LoseEffect = "LoseEffect"; // Lose Game Sound Effect
+        public const string WinEffect = "WinEffect"; // Win Game Sound Effect
 
         #endregion
 
@@ -47,10 +50,12 @@ namespace App05MonoGame.Controllers
         /// </summary>
         public static void LoadContent(ContentManager content)
         {
-            Songs.Add(SongName,content.Load<Song>("Sounds/Adventures"));            
+            Songs.Add(SongName,content.Load<Song>("Sounds/NightLurker"));            
 
-            SoundEffects.Add(CoinsEffect, content.Load<SoundEffect>("Sounds/Coins"));
             SoundEffects.Add(CollisionEffect, content.Load<SoundEffect>("Sounds/flame"));
+            SoundEffects.Add(ProjectileEffect, content.Load<SoundEffect>("Sounds/shooting"));
+            SoundEffects.Add(LoseEffect, content.Load<SoundEffect>("Sounds/lose"));
+            SoundEffects.Add(WinEffect, content.Load<SoundEffect>("Sounds/win"));
         }
         
 
@@ -62,10 +67,23 @@ namespace App05MonoGame.Controllers
         {
             switch (sound)
             {
-                case Sounds.Coins:
-                    SoundEffects[CoinsEffect].Play(); break;
+                // Collisions Sound
                 case Sounds.Collisions:
                     SoundEffects[CollisionEffect].Play(); break;
+
+                // Shooting Sound (reserved for future use)
+                case Sounds.Shooting:
+                    SoundEffects[ProjectileEffect].Play(); break;
+
+                // Lose Sound
+                case Sounds.Lose:
+                    SoundEffects[LoseEffect].Play(); break;
+
+                // Win Sound
+                case Sounds.Win:
+                    SoundEffects[WinEffect].Play(); break;
+
+                // Default Action
                 default:
                     break;
             }
