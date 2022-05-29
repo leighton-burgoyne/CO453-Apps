@@ -9,6 +9,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebApps", "WebApps\WebApps.
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MonoGame", "MonoGame\MonoGame.csproj", "{91B889D5-0728-4D6F-B41D-BC5BF8BAF062}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConsoleTests", "ConsoleTests\ConsoleTests.csproj", "{9C9B3052-8FC3-46DD-BD43-19F893DB9AB7}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{91B889D5-0728-4D6F-B41D-BC5BF8BAF062}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{91B889D5-0728-4D6F-B41D-BC5BF8BAF062}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{91B889D5-0728-4D6F-B41D-BC5BF8BAF062}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9C9B3052-8FC3-46DD-BD43-19F893DB9AB7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9C9B3052-8FC3-46DD-BD43-19F893DB9AB7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9C9B3052-8FC3-46DD-BD43-19F893DB9AB7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9C9B3052-8FC3-46DD-BD43-19F893DB9AB7}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
