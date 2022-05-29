@@ -16,13 +16,9 @@ namespace ConsoleAppProject.App01
         private const double MileInMetres = 1609.34; // 1 Mile in Metres used for calculating the Results.
         public const double FeetInMetres = 3.28084; // 1 Foot in Metres used for calculating the Results.
 
-        public const string FEET = "Feet";
-        public const string METRES = "Metres";
-        public const string MILES = "Miles";
-
         // Variables
-        public double FromValue { get; set; } // From Value Variable
-        public double ToValue { get; set; } // To Value Variable
+        public double FromDistance { get; set; } // From Distance Variable
+        public double ToDistance { get; set; } // To Distance Variable
 
         // Enumerations
         public DistanceUnits FromUnit { get; set; } // Unit to convert from
@@ -33,6 +29,7 @@ namespace ConsoleAppProject.App01
         {
             FromUnit = DistanceUnits.Miles;
             ToUnit = DistanceUnits.Feet;
+            FromDistance = 0;
         }
         /// <summary>
         /// Runs the required functions in the correct order, allowing for the program to operate correctly.
@@ -98,7 +95,7 @@ namespace ConsoleAppProject.App01
         /// </summary>
         public void InputValue()
         {
-            FromValue = ConsoleHelper.InputNumber("Enter value to convert to > ");
+            FromDistance = ConsoleHelper.InputNumber($"Enter number of {FromUnit} > ");
         }
 
         /// <summary>
@@ -108,27 +105,27 @@ namespace ConsoleAppProject.App01
         {
             if (FromUnit == DistanceUnits.Miles && ToUnit == DistanceUnits.Feet) // Miles to Feet
             {
-                ToValue = FromValue * MileInFeet;
+                ToDistance = FromDistance * MileInFeet;
             }
             else if (FromUnit == DistanceUnits.Feet && ToUnit == DistanceUnits.Miles) // Feet to Miles
             {
-                ToValue = FromValue / MileInFeet;
+                ToDistance = FromDistance / MileInFeet;
             }
             else if (FromUnit == DistanceUnits.Miles && ToUnit == DistanceUnits.Metres) // Miles to Metres
             {
-                ToValue = FromValue * MileInMetres;
+                ToDistance = FromDistance * MileInMetres;
             }
             else if (FromUnit == DistanceUnits.Metres && ToUnit == DistanceUnits.Miles) // Metres to Miles
             {
-                ToValue = FromValue / MileInMetres;
+                ToDistance = FromDistance / MileInMetres;
             }
             else if (FromUnit == DistanceUnits.Metres && ToUnit == DistanceUnits.Feet) // Metres to Feet
             {
-                ToValue = FromValue * FeetInMetres;
+                ToDistance = FromDistance * FeetInMetres;
             }
             else if (FromUnit == DistanceUnits.Feet && ToUnit == DistanceUnits.Metres) // Feet to Metres
             {
-                ToValue = FromValue / FeetInMetres;
+                ToDistance = FromDistance / FeetInMetres;
             }
             else // Other Combinations
             {
@@ -143,7 +140,7 @@ namespace ConsoleAppProject.App01
         public void OutputDistance()
         {
             ConsoleHelper.OutputHeading("Distance Converter");
-            Console.WriteLine(FromValue + " " + FromUnit + " converted to " + ToUnit + "\nEquals: " + ToValue);
+            Console.WriteLine(FromDistance + " " + FromUnit + " converted to " + ToUnit + "\nEquals: " + ToDistance);
         }
     }
 }
